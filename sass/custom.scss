@@ -1,0 +1,22 @@
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 375px,
+    lg: 1440px
+  );
+
+  $container-max-widths: (
+  sm: 375px,
+  lg: 1400px
+);
+
+$theme-colors: (
+    primary: hsl(0, 0%, 17%),
+    secondary: hsl(0, 0%, 59%),
+);
+
+$font-family-base: "Rubik";
+$font-size-base: 1.125rem;
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/bootstrap/scss/bootstrap-grid.scss";
