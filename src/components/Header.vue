@@ -8,7 +8,6 @@
                 v-model="ipAddress"
                  class="form-control" 
                  placeholder="Enter IP address or domain"
-                @click="locateIpDetails"
                 @keypress.enter="locateIpDetails">
                 <div class="input-group-append"
                  style="background-color: black;
