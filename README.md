@@ -1,6 +1,10 @@
 # ip-tracking-app
 
-> A Vue.js project
+> This tiny app is developed for locating the location of any given valid IP address.
+> I've used the leaflet map along with openstreet map for the map tiles.
+> For the API, made use of the free version of IPify API
+> The design of this app was provided by Frontend mentor in their challenges.
+> Check out the working in the gif below.
 
 ## Build Setup
 
@@ -15,4 +19,5 @@ npm run dev
 npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Working of the app,
+![alt Text](https://github.com/raobhavya92/IP-TRACKER/blob/master/IP_tracker_working.gif)Working
