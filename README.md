@@ -20,4 +20,4 @@ npm run build
 ```
 
 Working of the app,
-![alt Text](https://github.com/raobhavya92/IP-TRACKER/blob/master/IP_tracker_working.gif)
+![alt Text](https://github.com/raobhavya92/IP-TRACKER/blob/master/IP_tracker_working101.gif)
