@@ -7,6 +7,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
       locationDetails: {},
+      locationError: '',
       latitude: '',
       longitude:'',
       ipAddress: '',
@@ -25,9 +26,9 @@ const store = new Vuex.Store({
           } = data;
           state.latitude = lat;
           state.longitude = lng;
-
-          console.log('LOCATION DETAILS', state.locationDetails);
-
+      },
+      SET_LOCATION_ERRORED(state,error){
+        state.locationError = error;
       },
       SET_IP_ADDRESS(state,value) {
           state.ipAddress = value;
@@ -42,13 +43,12 @@ const store = new Vuex.Store({
             .then((response) => 
             {
                 commit('SET_LOCATION_DETAILS',response.data);
+                commit('SET_LOCATION_ERRORED','');
             })
-            .catch((error) => {
-                console.error('Error has occured', error);
+            .catch((reject) => {
+                commit('SET_LOCATION_DETAILS',{});
+                commit('SET_LOCATION_ERRORED',reject.response.data.messages);
             });
-
-        },
-        setMapMarker({}){
 
         },
         setIpAddress({commit}, value) {

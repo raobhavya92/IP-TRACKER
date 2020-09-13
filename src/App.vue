@@ -3,6 +3,7 @@
     <div class="container-fluid">
       <div class="bg-container">
         <Header></Header>
+        <Results></Results>
       </div>
       <div id="map"></div>
     </div>
@@ -11,12 +12,13 @@
 
 <script>
 import Header from '../src/components/Header';
+import Results from '../src/components/Results';
 import L from 'leaflet';
 import { mapState } from 'vuex'; 
 
 export default {
   name: 'app',
-  components: { Header },
+  components: { Header, Results },
   data () {
     return {
       map: {},
@@ -82,8 +84,9 @@ export default {
 
     #map {
       position: absolute;
+      z-index: -1;
       bottom: 0;
-      top: 500px;
+      top: 300px;
       width: 100%;
       height: auto;
     }

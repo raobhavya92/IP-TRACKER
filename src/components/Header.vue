@@ -3,10 +3,13 @@
         <div class="title">IP Address Tracker</div>
         <div class="search-bar col-lg-6">
             <div class="input-group" style="border-radius:4px">
-                <input type="text"
+                <input 
+                type="text"
                 v-model="ipAddress"
                  class="form-control" 
-                 placeholder="Enter IP address or domain">
+                 placeholder="Enter IP address or domain"
+                @click="locateIpDetails"
+                @keypress.enter="locateIpDetails">
                 <div class="input-group-append"
                  style="background-color: black;
                  border-radius: 4px;">
@@ -35,7 +38,6 @@ export default {
                     return this.getIPAddress;
                 },
                 set(value) {
-                    console.log('ipVAlue', value);
                     this.setIpAddress(value);
                 }
             },
@@ -57,6 +59,7 @@ export default {
         flex-direction: column;
         align-items: center;
         padding-top: 40px;
+        margin-bottom: 20px;
         color: white;
         .title {
             font-size: 40px;
@@ -72,11 +75,7 @@ export default {
                  border-radius: 10px 0 0 10px;
                 }
             .input-group-append{
-                 border-radius: 0 10px 10px 0;
-                .btn{
-                    // background-image: url('../../src/assets/icon-arrow.svg');
-                    // background-size: 100% 100%;
-                }
+                 border-radius: 0 10px 10px 0 !important;
             }
             }
         }
