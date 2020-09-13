@@ -1,27 +1,92 @@
 <template>
   <div id="app">
-    {{ msg }}
+    <div class="container-fluid">
+      <div class="bg-container">
+        <Header></Header>
+      </div>
+      <div id="map"></div>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import Header from '../src/components/Header';
+import L from 'leaflet';
+import { mapState } from 'vuex'; 
 
 export default {
   name: 'app',
+  components: { Header },
   data () {
     return {
-      msg: {},
+      map: {},
+      marker: {},
+      tiles: {},
+      tileUrl: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+
     }
   },
+  computed: {
+    ...mapState({         
+        locationDetails: state => state.locationDetails,
+        latitude: state => state.latitude,
+        longitude: state => state.longitude,
+    }),
+  },
+  watch: {
+    locationDetails(newLocation, oldLocation){
+      this.marker.setLatLng([this.latitude, this.longitude]);
+      this.map.setView([this.latitude,this.longitude]);
+    },
+  },
   mounted() {
-    axios
-    .get('https://geo.ipify.org/api/v1?apiKey=at_TgCTjVrZrXtLQrPG2rBMWzMF5R577&ipAddress=8.8.8.8')
-    .then(response => (this.msg = response))
-  }
+   this.setUpMap([0,0]);
+  },
+  methods: {
+    updateTile() {
+       const { attribution, tileUrl } = this;
+       this.tiles = L.tileLayer(tileUrl, {attribution});
+      this.tiles.addTo(this.map);
+    },
+    setUpMap(coordinates) {
+    this.map = L.map('map', {
+      center: coordinates,
+      zoom: 5
+    });
+
+    const locationIcon = L.icon({
+      iconUrl: '../../src/assets/icon-location.svg',
+      iconSize: [30,30],
+      iconAnchor: [25,16],
+    });
+
+    this.marker = L.marker(coordinates, {icon: locationIcon}).addTo(this.map);
+    this.updateTile();
+    },
+  },
 }
 </script>
 
 <style lang="scss">
-  @import "../main.css";
+ @import "../main.css";
+
+  .container-fluid {
+    padding: 0 !important;
+    .bg-container {
+      height: 300px;
+      background-image: url('../src/assets/pattern-bg.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+
+    #map {
+      position: absolute;
+      bottom: 0;
+      top: 500px;
+      width: 100%;
+      height: auto;
+    }
+  }
+
 </style>
